@@ -1,0 +1,97 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="zxx">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="Ogani Template">
+    <meta name="keywords" content="Ogani, unica, creative, html">
+    <!-- Css Styles -->
+
+    <!-- Css Styles -->
+   
+
+    <link rel="stylesheet" href='{% static style.css %}'  type="text/css">
+ 
+</head>
+
+<body>
+  <!-- Third Level Sidebar -->
+<nav class="navbar navbar-expand-lg fixed-top navbar-dark bg-dark pmd-navbar pmd-z-depth">
+    <a href="javascript:void(0);" data-target="basicSidebar" data-placement="left" data-position="slidepush" is-open="true" is-open-width="1000" class="btn btn-sm pmd-btn-fab pmd-btn-flat pmd-ripple-effect pmd-sidebar-toggle"><i class="material-icons md-light">menu</i></a>
+    <a class="navbar-brand" href="javascript:void(0);">Brand</a>
+
+    <!-- Navbar Right icon -->      
+    <div class="pmd-navbar-right-icon ml-auto"> 
+      <a href="javascript:void(0);" class="btn btn-sm pmd-btn-fab pmd-btn-flat pmd-ripple-effect"><i class="material-icons pmd-sm md-light">search</i></a>
+    </div>
+</nav>
+
+<section id="pmd-main">
+    <!-- Left sidebar -->
+    <aside id="basicSidebar" class="pmd-sidebar bg-light pmd-z-depth" role="navigation">
+        <ul class="nav flex-column pmd-sidebar-nav">
+            <li class="nav-item">
+                <a class="nav-link" data-toggle="collapse" href="#inbox" role="button" aria-expanded="true" aria-controls="inbox">
+                    <i class="material-icons pmd-list-icon pmd-sm">inbox</i>
+                    <span class="media-body">Inbox</span>
+                    <i class="material-icons md-light ml-2 pmd-sm">more_vert</i>
+                </a>
+                <ul class="collapse show" id="inbox" data-parent="#basicSidebar">
+                    <li class="nav-item">
+                        <a class="nav-link" data-toggle="collapse" href="#profile" role="button" aria-expanded="true" aria-controls="profile">
+                            <i class="material-icons pmd-list-icon pmd-sm">account_circle</i>
+                            <span class="media-body">View Profile</span>
+                            <i class="material-icons md-light ml-2 pmd-sm">more_vert</i>
+                        </a>
+                        <ul class="collapse show" id="profile">
+                            <li class="nav-item">
+                                <a class="nav-link" href="javascript:void(0);"><span class="media-body">Personal Information</span></a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="javascript:void(0);"><span class="media-body">Educational Qualification</span></a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="javascript:void(0);"><span class="media-body">Work and Experience</span></a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="javascript:void(0);">
+                            <i class="material-icons pmd-list-icon pmd-sm">settings</i>
+                            <span class="media-body">Settings</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="javascript:void(0);">
+                            <i class="material-icons pmd-list-icon pmd-sm">settings_power</i>
+                            <span class="media-body">Logout</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link active" href="javascript:void(0);">
+                    <i class="material-icons pmd-list-icon pmd-sm">star</i>
+                    <span class="media-body">Stared</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="javascript:void(0);">
+                    <i class="material-icons pmd-list-icon pmd-sm">send</i>
+                    <span class="media-body">Sent Email</span>
+                </a>
+            </li>
+        </ul>
+    </aside>
+    <div class="pmd-sidebar-overlay"></div>
+    <!-- Start Content -->
+    <div class="pmd-content custom-pmd-content" id="content">
+        <h2 class="headline">Sidebar Constructor</h2>
+        <p>This structure shows a permanent app bar with a floating action button. The app bar absorbs elements from the tablet and mobile bottom bars.</p>
+        <p style="margin-bottom:0;">An optional bottom bar can be added for additional functionality or action overflow. A side nav overlays all other structural elements. A right nav menu can be accessed temporarily or pinned for permanent display.<br><br></p>
+    </div>
+</section> 
+</body>
+
+</html>
