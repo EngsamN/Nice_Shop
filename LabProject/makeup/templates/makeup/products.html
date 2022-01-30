@@ -109,16 +109,20 @@
                                     {% for i in prolst %}
                                     <div class="col-md-3">
                                         <div class="card p-3">
-                                            <div class="text-center"> <img src="https://i.imgur.com/w2rCsEw.jpg" width="200"> </div>
+                                            <!-- <div class="text-center"> <img src="https://i.imgur.com/w2rCsEw.jpg" width="200"> </div> -->
                                             <div class="product-details"> <span class="font-weight-bold d-block">{{i.price}}</span>{{i.name}} <span></span>
                                                 <div class="buttons d-flex flex-row">
-                                                    <div class="cart"><i class="fa fa-shopping-cart"></i></div> <button class="btn btn-success cart-button btn-block"><span class="dot">1</span>Add to cart </button>
-                                                </div>
+                                                      <button type="button" class="btn btn-success cart-button btn-block"><a href="{% url 'detail' i.id %}" style="color: white;">More Detials</a></button>
+                                                       
+                                                    </div>
+                   
+
                                                 <div class="weight"> <small>{{i.brand}}</small> </div>
                                             </div>
                                         </div>
                                     </div>
                                     {% endfor %}
+
                                   
                                   
                              
