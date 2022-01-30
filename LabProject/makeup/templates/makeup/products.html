@@ -10,6 +10,7 @@
         <title>Cosmetic Boutique</title>
         <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
         <link href="{% static 'css/styles.css' %} "  rel="stylesheet" />
+        <link href="{% static 'css/mainstyle.css' %} "  rel="stylesheet" />
         <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js" crossorigin="anonymous"></script>
     </head>
     <body class="sb-nav-fixed">
@@ -99,15 +100,32 @@
                 </nav>
             </div>
             <div id="layoutSidenav_content">
-                <main>
-              
-                   
-                <h1>welcome in home page</h1>
-                <h1>welcome in home page</h1>
-                 
+                    <main id="mainstyle">
+
+                        <div class="wrapper">
+                            <div class="container">
                                 
-          
-                 </main>
+                                <div class="row g-1">
+                                    {% for i in prolst %}
+                                    <div class="col-md-3">
+                                        <div class="card p-3">
+                                            <div class="text-center"> <img src="https://i.imgur.com/w2rCsEw.jpg" width="200"> </div>
+                                            <div class="product-details"> <span class="font-weight-bold d-block">{{i.price}}</span>{{i.name}} <span></span>
+                                                <div class="buttons d-flex flex-row">
+                                                    <div class="cart"><i class="fa fa-shopping-cart"></i></div> <button class="btn btn-success cart-button btn-block"><span class="dot">1</span>Add to cart </button>
+                                                </div>
+                                                <div class="weight"> <small>{{i.brand}}</small> </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    {% endfor %}
+                                  
+                                  
+                             
+                                </div>
+                            </div>
+                        </div>
+                    </main>
                 <footer class="py-4 bg-light mt-auto">
                     <div class="container-fluid px-4">
                         <div class="d-flex align-items-center justify-content-between small">

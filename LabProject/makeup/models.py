@@ -3,11 +3,11 @@ from django.db import models
 # Create your models here.
 
 class brand(models.Model):
-    Name = models.CharField(max_length=63)
-    Orign=models.CharField(max_length=63)
+    name = models.CharField(max_length=63)
+    orign= models.CharField(max_length=63)
 
     def __str__(self):
-        return self.Name
+        return self.name
 
     def get_absolate_url(self,Url):
         return self.Url
@@ -16,9 +16,9 @@ class brand(models.Model):
 
 
 class product(models.Model):
-     Name = models.CharField(max_length=63)
-     kind = models.CharField(max_length=63)
-     description=models.CharField(max_length=63)
-     Expir_date = models.DateField()
-     price = models.IntegerField()
-     brand=models.ForeignKey(brand, on_delete=models.CASCADE)
+     name = models.CharField(max_length=63,null=True)
+     kind = models.CharField(max_length=63,null=True)
+     description=models.CharField(max_length=63,null=True)
+     expir_date = models.DateField(null=True)
+     price = models.IntegerField(null=True)
+     brand=models.ForeignKey(brand, on_delete=models.CASCADE,null=True)

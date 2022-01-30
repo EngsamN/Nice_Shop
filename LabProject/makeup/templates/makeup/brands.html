@@ -10,12 +10,13 @@
         <title>Cosmetic Boutique</title>
         <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
         <link href="{% static 'css/styles.css' %} "  rel="stylesheet" />
+        <link href="{% static 'css/mainstyle.css' %} "  rel="stylesheet" />
         <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js" crossorigin="anonymous"></script>
     </head>
     <body class="sb-nav-fixed">
         <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
             <!-- Navbar Brand-->
-            <a class="navbar-brand ps-3" href="index.html">Cosmetic Boutique</a>
+            <a class="navbar-brand ps-3" href="{% url 'index'  %}">Cosmetic Boutique</a>
             <!-- Sidebar Toggle-->
             <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i class="fas fa-bars"></i></button>
             <!-- Navbar Search-->
@@ -99,27 +100,53 @@
                 </nav>
             </div>
             <div id="layoutSidenav_content">
-                <main>
+                    <main>
               
-                   
-                <h1>welcome in home page</h1>
-                <h1>welcome in home page</h1>
-                 
-                                
-          
-                 </main>
-                <footer class="py-4 bg-light mt-auto">
-                    <div class="container-fluid px-4">
-                        <div class="d-flex align-items-center justify-content-between small">
-                            <div class="text-muted">Copyright &copy; Eng.samiah Al-shehri </div>
-                            <div>
-                                <!-- <a href="#">Privacy Policy</a> -->
-                                &middot;
-                                <!-- <a href="#">Terms &amp; Conditions</a> -->
+                        <div id="layoutSidenav_content">
+                            <main id="mainstyle">
+                      
+                                <div class="wrapper">
+                            <div class="container">
+                                        
+                                <div class="row g-1">
+                                    {% for i in brands %}
+                                    <div class="col-md-3">
+                                        <div class="card p-3">
+                                            <div class="text-center"> <img src="{% static 'assets/img/amiaklogo.jpg'%}" width="200"> </div>
+                                            <div class="product-details"> <span class="font-weight-bold d-block">{{i.name}}</span>{{i.orign}} <span></span>
+                                               
+                                                <div class="weight"> <small>this brand data</small> </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    {% endfor %}
+                                  
+                                  
+                             
+                                </div>
+                        
+                            
                             </div>
-                        </div>
+                         
+                            </main>
+                        <footer class="py-4 bg-light mt-auto">
+                            <div class="container-fluid px-4">
+                                <div class="d-flex align-items-center justify-content-between small">
+                                    <div class="text-muted">Copyright &copy; Eng.samiah Al-shehri </div>
+                                    <div>
+                                        <!-- <a href="#">Privacy Policy</a> -->
+                                        &middot;
+                                        <!-- <a href="#">Terms &amp; Conditions</a> -->
+                                    </div>
+                                </div>
+                            </div>
+                        </footer>
                     </div>
-                </footer>
+                </div>
+                    
+        
+            </main>
+                
             </div>
         </div>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
