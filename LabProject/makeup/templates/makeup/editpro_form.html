@@ -10,13 +10,12 @@
         <title>Cosmetic Boutique</title>
         <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
         <link href="{% static 'css/styles.css' %} "  rel="stylesheet" />
-        <link href="{% static 'css/mainstyle.css' %} "  rel="stylesheet" />
         <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js" crossorigin="anonymous"></script>
     </head>
     <body class="sb-nav-fixed">
         <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
             <!-- Navbar Brand-->
-            <a class="navbar-brand ps-3" href="index.html">Cosmetic Boutique</a>
+            <a class="navbar-brand ps-3" href="{% url 'index'  %}">Cosmetic Boutique</a>
             <!-- Sidebar Toggle-->
             <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i class="fas fa-bars"></i></button>
             <!-- Navbar Search-->
@@ -100,38 +99,32 @@
                 </nav>
             </div>
             <div id="layoutSidenav_content">
-                    <main id="mainstyle">
+                <main>
+           
 
-                        <div class="wrapper">
-                            <div class="container">
-                                
-                                <div class="row g-1">
-                                    {% for i in prolst %}
-                                    <div class="col-md-3">
-                                        <div class="card p-3">
-                                            <!-- <div class="text-center"> <img src="https://i.imgur.com/w2rCsEw.jpg" width="200"> </div> -->
-                                            <div class="product-details"> <span class="font-weight-bold d-block">{{i.price}}</span>{{i.name}} <span></span>
-                                                <div class="buttons d-flex flex-row">
-                                                      <button type="button" class="btn btn-success cart-button btn-block"><a href="{% url 'detail' i.id %}" style="color: white;">More Detials</a></button>
-                                                       
-                                                    </div>
-                   
+<div style="width:800px; margin:0 auto;" >
+    <h1 style="border: 0cm;font-size: 20px; font-family: 'Courier New', Courier, monospace;">product items</h1>
+      <form  method="POST"  enctype="multipart/form-data" style="width:800px; margin:0 auto;" >
 
-                                                <div class="weight"> <small>{{i.brand}}</small> </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    {% endfor %}
-
-                                  
-                                  
-                             
-                                </div>
-                            </div>
-                        </div>
-                    </main>
-                <footer class="py-4 bg-light mt-auto">
-                    <div class="container-fluid px-4">
+	<!-- Security token -->
+	       {% csrf_token %}
+         
+	<!-- Using the formset -->
+	      {{ form.as_p }}
+    
+	    <input type="submit" value="update">
+       </form>
+      
+        <!-- Display attributes of instance -->
+        <!-- {{proditals.description}} <br/>
+        {{proditals.description}}  -->
+    
+    </div>
+       
+               </main>
+   <footer class="py-4 bg-light mt-auto">
+     
+    <div class="container-fluid px-4">
                         <div class="d-flex align-items-center justify-content-between small">
                             <div class="text-muted">Copyright &copy; Eng.samiah Al-shehri </div>
                             <div>
@@ -153,3 +146,4 @@
         <script src="js/datatables-simple-demo.js"></script>
     </body>
 </html>
+

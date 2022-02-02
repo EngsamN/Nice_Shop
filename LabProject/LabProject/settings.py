@@ -25,20 +25,24 @@ SECRET_KEY = 'django-insecure-ii-b#9ok3j+hgr14zh!(k#6g^8tx4rf!7%&2r!e!55784mx-&5
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
-
+LOGIN_PREDIRCT_URL='/index/'
 ALLOWED_HOSTS = []
 
 
 # Application definition
 
 INSTALLED_APPS = [
+    # 'admin_interface',
+    # 'colorfield',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'makeup'
+    'makeup',
+    'account',
+
 ]
 
 MIDDLEWARE = [
@@ -125,3 +129,4 @@ STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'static'),
 )
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+LOGIN_REDIRECT_URL = 'index' # URL redirecting after a successful authentication

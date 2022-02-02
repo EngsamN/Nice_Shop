@@ -22,3 +22,4 @@ class product(models.Model):
      expir_date = models.DateField(null=True)
      price = models.IntegerField(null=True)
      brand=models.ForeignKey(brand, on_delete=models.CASCADE,null=True)
+     field_name = models.ImageField(upload_to='static/images/',default='SOME STRING')
