@@ -23,14 +23,17 @@ class AdminLogin(LoginView):
     form = LoginForm
     template_name = 'LoginView_form.html'
     def get(self, request, **args):
+        if request.user.is_authenticated:
+            return redirect('user-info', permanent=False)
+      
         context = {  'form': LoginForm()}
-
+    
         return render(request, self.template_name,context)
 
 
 
 
-@login_required
+@login_required(login_url='login')
 def logout_view(request):
     logout(request)
     return redirect('login', permanent=False)
