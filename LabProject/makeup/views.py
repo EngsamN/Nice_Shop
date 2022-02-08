@@ -1,10 +1,13 @@
 from django.shortcuts import render
 from django.shortcuts import (get_object_or_404,
 							render,
+                            
 							HttpResponseRedirect)
+                            
 
 from django.views.generic.edit import FormView 
 from django.views.generic import  DetailView
+from django.contrib.auth.models import User
 
 from makeup import admin
 from .form  import EditproForm
@@ -90,37 +93,15 @@ class EmpImageDisplay(DetailView):
     template_name = 'products.html'
     context_object_name = 'prolst'
 
-# # after updating it will redirect to detail_View
-# def detail_view(request, id):
-# 	# dictionary for initial data with
-# 	# field names as keys
-# 	context ={}
+def getuser_name(request):
+        adminuser=request.user
+        print(adminuser)
+        # print(adminuser)
+        # useradmin=False
+        # for i in adminuser:
+        #     print(i)
+        #     if  i  == "adminG1":
+        #         useradmin=True
+        #         return useradmin
 
-# 	# add the dictionary during initialization
-# 	context["data"] = EditproForm.objects.get(id = id)
-		
-# 	return render(request, "editpro_form.html", context)
-
-# # update view for details
-# def update_view(request, id):
-# 	# dictionary for initial data with
-# 	# field names as keys
-# 	context ={}
-
-# 	# fetch the object related to passed id
-# 	obj = get_object_or_404(product, id = id)
-
-# 	# pass the object as instance in form
-# 	form = EditproForm(request.POST or None, instance = obj)
-
-# 	# save the data from the form and
-# 	# redirect to detail_view
-# 	if form.is_valid():
-# 		form.save()
-# 		return HttpResponseRedirect("/"+id)
-
-# 	# add form dictionary to context
-# 	context["form"] = form
-
-# 	return render(request, "editpro_form.html", context)
 

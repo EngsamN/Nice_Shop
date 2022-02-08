@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html>
+{% load static %}
+
+   <head>
+     <!-- Basic -->
+	 <meta charset="utf-8" />
+	 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	 <!-- Mobile Metas -->
+	 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+	 <!-- Site Metas -->
+	 <meta name="keywords" content="" />
+	 <meta name="description" content="" />
+	 <meta name="author" content="" />
+	
+	 <title style="background-color: brown;">Cosmetic Boutique</title>
+		 <!-- bootstrap core css -->
+	 <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.css' %} " />
+	 <!-- font awesome style -->
+	 <link href="{% static 'css/font-awesome.min.css'%}" rel="stylesheet" />
+	 <!-- Custom styles for this template -->
+	 <link href="{%static 'css/style.css' %}" rel="stylesheet" />
+	 <!-- responsive style -->
+	 <link href="{% static 'css/responsive.css' %}" rel="stylesheet" />
+
+   </head>
+    <body>
+		 <!-- header section strats -->
+         <header class="header_section">
+            <div class="container">
+               <nav class="navbar navbar-expand-lg custom_nav-container ">
+                  <a class="navbar-brand" href="{% url 'index'  %}">Cosmetic Boutique</a>
+                  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                  <span class=""> </span>
+                  </button>
+                  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                     <ul class="navbar-nav">
+                        <li class="nav-item active">
+                           <a class="nav-link" href="{% url 'index'  %}"> Home <span class="sr-only">(current)</span></a>
+                        </li>
+                      
+                        <li class="nav-item">
+                           <a class="nav-link"  href="{% url 'product'  %}">Products</a>
+                        </li>
+                        <li class="nav-item">
+                           <a class="nav-link" href="{% url 'brand'  %}">Brands</a>
+                        </li>
+                       
+                        
+                     {% if user.is_authenticated %}
+                     
+                         {%if  adminuser%}
+                     <li class="nav-item active">
+                        <a class="nav-link"  href="{% url 'admin:index'  %}"> DashBoard <span class="sr-only">(current)</span></a>
+                     </li>  
+                         {% else %}
+                     <li class="nav-item active">
+                        <a class="nav-link" hidden="hidden"  href="{% url 'admin:index'  %}"> DashBoard <span class="sr-only">(current)</span></a>
+                     </li>  
+                         {% endif %} 
+  
+                     <li class="nav-item active">
+                        <a class="nav-link" href="{% url 'logout'  %}"> logout <span class="sr-only">(current)</span></a>
+                     </li>
+               
+                     {% else %}
+                     <li class="nav-item active">
+                        <a class="nav-link" href="{% url 'singup'  %}"> singup <span class="sr-only">(current)</span></a>
+                     </li>
+                     <li class="nav-item active">
+                        <a class="nav-link"  href="{% url 'login'  %}"> Singin <span class="sr-only">(current)</span></a>
+                     </li>
+                     {% endif %} 
+                         
+                     
+                 
+                       <div>
+                        <a href="{% url 'cart'  %}"> cart</a>
+                       </div>
+                        <form class="form-inline">
+                      
+                        </form>
+                        <form class="form-inline">
+                           <button class="btn  my-2 my-sm-0 nav_search-btn" type="submit">
+                           <i class="fa fa-search" aria-hidden="true"></i>
+                           </button>
+                        </form>
+                     </ul>
+                  </div>
+               </nav>
+            </div>
+         </header>
+		<div class="container">
+			     
+			<div class="shopping-cart">
+				<!-- Title -->
+				<div class="title">
+				  Shopping Bag
+				</div>
+			   
+				<!-- Product #1 -->
+				<div class="item">
+				  <div class="buttons">
+					<span class="delete-btn"></span>
+					<span class="like-btn"></span>
+				  </div>
+			   
+				  <div class="image">
+					<img src="item-1.png" alt="" />
+				  </div>
+			   
+				  <div class="description">
+					<span>Common Projects</span>
+					<span>Bball High</span>
+					<span>White</span>
+				  </div>
+			   
+				  <div class="quantity">
+					<button class="plus-btn" type="button" name="button">
+					  <img src="plus.svg" alt="" />
+					</button>
+					<input type="text" name="name" value="1">
+					<button class="minus-btn" type="button" name="button">
+					  <img src="minus.svg" alt="" />
+					</button>
+				  </div>
+			   
+				  <div class="total-price">$549</div>
+				</div>
+			   
+				<!-- Product #2 -->
+				<div class="item">
+				  <div class="buttons">
+					<span class="delete-btn"></span>
+					<span class="like-btn"></span>
+				  </div>
+			   
+				  <div class="image">
+					<img src="item-2.png" alt=""/>
+				  </div>
+			   
+				  <div class="description">
+					<span>Maison Margiela</span>
+					<span>Future Sneakers</span>
+					<span>White</span>
+				  </div>
+			   
+				  <div class="quantity">
+					<button class="plus-btn" type="button" name="button">
+					  <img src="plus.svg" alt="" />
+					</button>
+					<input type="text" name="name" value="1">
+					<button class="minus-btn" type="button" name="button">
+					  <img src="minus.svg" alt="" />
+					</button>
+				  </div>
+			   
+				  <div class="total-price">$870</div>
+				</div>
+			   
+				<!-- Product #3 -->
+				<div class="item">
+				  <div class="buttons">
+					<span class="delete-btn"></span>
+					<span class="like-btn"></span>
+				  </div>
+			   
+				  <div class="image">
+					<img src="item-3.png" alt="" />
+				  </div>
+			   
+				  <div class="description">
+					<span>Our Legacy</span>
+					<span>Brushed Scarf</span>
+					<span>Brown</span>
+				  </div>
+			   
+				  <div class="quantity">
+					<button class="plus-btn" type="button" name="button">
+					  <img src="plus.svg" alt="" />
+					</button>
+					<input type="text" name="name" value="1">
+					<button class="minus-btn" type="button" name="button">
+					  <img src="minus.svg" alt="" />
+					</button>
+				  </div>
+			   
+				  <div class="total-price">$349</div>
+				</div>
+			  </div>
+			
+		  </div>
+		  <script src="js/jquery-3.4.1.min.js"></script>
+		  <!-- popper js -->
+		  <script src="js/popper.min.js"></script>
+		  <!-- bootstrap js -->
+		  <script src="js/bootstrap.js"></script>
+		  <!-- custom js -->
+		  <script src="js/custom.js"></script>
+</body>
+</html>

@@ -1,3 +1,4 @@
+from audioop import reverse
 from django.db import models
 
 # Create your models here.
@@ -10,6 +11,7 @@ class brand(models.Model):
         return self.name
 
     def get_absolate_url(self,Url):
+        return reverse("product")
         return self.Url
  # startups = models.ManyToManyField(Startup, related_name = 'blog_posts',null=True)
 

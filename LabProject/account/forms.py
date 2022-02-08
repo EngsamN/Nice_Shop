@@ -23,20 +23,24 @@ class NewUserForm(UserCreationForm):
 
 
 
-
 class LoginForm(forms.Form):
-    username = forms.CharField(label='Username', max_length=100)
-    password = forms.CharField(label='Password', max_length=200, widget=forms.PasswordInput())
+	"""''' this form login to create login field with password dot''' """
+	username = forms.CharField(label='Username', max_length=100)
+	password = forms.CharField(label='Password', max_length=200, widget=forms.PasswordInput())# widget=forms.PasswordInput() this to make password hidden like dot
+	def authentication(self):
+		username = self.cleaned_data['username']
+		password = self.cleaned_data['password']
+		is_authentication = authenticate(username=username, password=password)
+		if is_authentication:
+			return is_authentication
+		return None
 
+	
+ 
 
+   
 
-    def authentication(self):
-
-        username = self.cleaned_data['username']
-        password = self.cleaned_data['password']
-
-        is_authentication = authenticate(username=username, password=password)
-
-        if is_authentication:
-            return is_authentication
-        return None
+	
+		
+		
+      
