@@ -28,4 +28,4 @@ jobs:
         gradle-version: '7.0'
 
     - name: Build Documentation
-      run: ./gradlew -b docToolchain/docToolchain.gradle createDocs
+      run: ./gradle/gradlew -b docToolchain/docToolchain.gradle createDocs
