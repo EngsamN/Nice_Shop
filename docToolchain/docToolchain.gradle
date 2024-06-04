@@ -1,0 +1,26 @@
+plugins {
+    id 'org.asciidoctor.jvm.convert' version '3.3.2'
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    asciidoctor 'org.asciidoctor:asciidoctorj:2.4.3'
+    asciidoctor 'org.asciidoctor:asciidoctorj-pdf:1.5.3'
+    asciidoctor 'org.asciidoctor:asciidoctorj-diagram:2.2.0'
+}
+
+asciidoctor {
+    sources {
+        include 'src/docs/asciidoc/**/*.adoc'
+    }
+    backends 'html5', 'pdf'
+}
+
+task createDocs(type: org.asciidoctor.gradle.AsciidoctorTask) {
+    sourceDir = file('src/docs/asciidoc')
+    outputDir = file("${buildDir}/docs")
+    backends 'html5', 'pdf'
+}
