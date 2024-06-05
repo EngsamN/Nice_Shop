@@ -31,13 +31,10 @@ jobs:
         source "$HOME/.sdkman/bin/sdkman-init.sh"
         sdk install doctoolchain
 
-    - name: Move Configuration File
-      run: mv config/docToolchain.groovy Config.groovy
-
     - name: Run DocToolchain Arch42
       run: |
         source "$HOME/.sdkman/bin/sdkman-init.sh"
-        doctoolchain generateHTML
+        doctoolchain . generateHTML -PconfigFile=config/docToolchain.groovy
 
     - name: Upload generated site
       uses: actions/upload-artifact@v2
