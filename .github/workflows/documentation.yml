@@ -34,10 +34,10 @@ jobs:
     - name: Run DocToolchain Arch42
       run: |
         source "$HOME/.sdkman/bin/sdkman-init.sh"
-        doctoolchain src/docs/asciidoc/config.adoc generateHTML
+        doctoolchain generateHTML -Pf:src/docs/asciidoc/config.adoc
 
     - name: Upload generated site
       uses: actions/upload-artifact@v2
       with:
         name: site
-        path: src/docs/asciidoc/build/html5
+        path: build/docs/html5
