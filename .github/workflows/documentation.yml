@@ -1,57 +1,42 @@
-name: Build Documentation
+name: DocToolchain Arch42
 
 on:
   push:
     branches:
-      - main  # You can adjust this to trigger on specific branches
+      - main
+  pull_request:
+    branches:
+      - main
+  schedule:
+    - cron: '0 0 * * *' # Runs daily at midnight
+  workflow_dispatch:
 
 jobs:
   build:
-    runs-on: ubuntu-latest  # You can choose a different runner
+    runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v2  # Checks out your repository code
+    - name: Checkout repository
+      uses: actions/checkout@v2
 
     - name: Set up JDK 11
       uses: actions/setup-java@v2
       with:
         java-version: '11'
-        distribution: 'adopt'  # Specify the distribution
 
-    - name: Install Gradle
-      uses: gradle/gradle-build-action@v2
+    - name: Set up DocToolchain
+      run: |
+        curl -sSL https://get.sdkman.io | bash
+        source "$HOME/.sdkman/bin/sdkman-init.sh"
+        sdk install doctoolchain
+
+    - name: Run DocToolchain Arch42
+      run: |
+        source "$HOME/.sdkman/bin/sdkman-init.sh"
+        doctoolchain src/docs/asciidoc/config.adoc generateHTML
+
+    - name: Upload generated site
+      uses: actions/upload-artifact@v2
       with:
-        gradle-version: '7.0'  # Adjust if needed
-
-    - name: Make DocToolchain Arc42 Docs
-      run: ./gradlew -b docToolchain/docToolchain.gradle arc42Docs  # Adjust command if necessary
-
-**3. Workflow Explanation:**
-
-- **`name`:** This defines the name of your workflow (e.g., Build Documentation).
-- **`on`:** This specifies when the workflow should be triggered. Here, it runs on a push event to the `main` branch. You can adjust this to your preference.
-- **`jobs`:** This defines the jobs within your workflow. Here, there's a single job named `build`.
-- **`runs-on`:** This specifies the runner environment where the job will execute. Here, it uses `ubuntu-latest`.
-- **`steps`:** This defines a sequence of steps the job will perform.
-   - **Checkout Code:** This step uses the `actions/checkout@v2` action to retrieve your repository code.
-   - **Set Up JDK 11:** This step uses the `actions/setup-java@v2` action to install Java 11 (or a different version you need) on the runner.
-   - **Install Gradle:** This step uses the `gradle/gradle-build-action@v2` action to install the specified Gradle version (7.0 in this example).
-   - **Make DocToolchain Arc42 Docs:** This is the crucial step where you build the documentation. The command `./gradlew -b docToolchain/docToolchain.gradle arc42Docs` triggers the DocToolchain build process with the `arc42Docs` task (assuming this task is defined). 
-
-**4. Customization:**
-
-- **Gradle Version:** Adjust the `gradle-version` to match the version required by your project.
-- **DocToolchain Task:** The specific DocToolchain task name might differ depending on your project setup. Check your `doctoolchain.gradle` file for the correct task name.
-- **Output Artifacts:** You can add additional steps to upload the generated documentation artifacts (e.g., HTML files) as workflow outputs for further processing or deployment.
-
-**5. Repository Integration:**
-
-- After creating the `.github/workflows/build_docs.yml` file, commit and push your changes to your repository. GitHub Actions will automatically detect the workflow file and start running it based on the defined triggers.
-
-**Additional Tips:**
-
-- Refer to the documentation for `actions/checkout@v2`, `actions/setup-java@v2`, and `gradle/gradle-build-action@v2` for more details on their configuration options.
-- Consult the DocToolchain documentation or project resources to confirm the appropriate Gradle task name for building Arc42 documentation.
-- Test your workflow by pushing changes to your repository and observing the workflow execution logs on GitHub.
-
-By following these steps and customizing the workflow based on your project's requirements, you can successfully automate the DocToolchain Arc42 documentation build process within your GitHub repository using Actions.
+        name: site
+        path: src/docs/asciidoc/build/html5
