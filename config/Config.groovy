@@ -19,3 +19,9 @@ docToolchain {
         '12_glossary'
     ]
 }
+
+templates {
+    html {
+        basedir = 'templates/html'
+    }
+}
