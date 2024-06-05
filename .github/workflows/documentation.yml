@@ -34,7 +34,7 @@ jobs:
     - name: Run DocToolchain Arch42
       run: |
         source "$HOME/.sdkman/bin/sdkman-init.sh"
-        doctoolchain -PconfigFile=config/Config.groovy generateHTML
+        doctoolchain generateHTML --configFile=config/Config.groovy
 
     - name: Upload generated site
       uses: actions/upload-artifact@v2
