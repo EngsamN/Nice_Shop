@@ -24,3 +24,13 @@ class UserProfile(models.Model):
             str: A string containing the user's username.
         """
         return self.user.username
+
+
+    def info fun(self):
+        """
+        Returns a info info of the user profile.
+
+        Returns:
+            info: username
+        """
+        return self.user.username
