@@ -20,7 +20,7 @@ def extract_docstrings(directory):
 
 if __name__ == "__main__":
     if len(sys.argv) != 2:
-        print("Usage: python docstring_extractor.py <directory>")
+        print("Usage:  python /home/samaih/Django_Shop/docstring_extractor.py /home/samaih/Django_Shop/LabProject")
         sys.exit(1)
 
     directory = sys.argv[1]
