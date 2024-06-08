@@ -1,0 +1,18 @@
+:filename: 015_tasks/03_task_previewSite.adoc
+include::_config.adoc[]
+
+[[task_previewsite]]
+= previewSite
+
+include::../_feedback.adoc[]
+
+When you use the build in static site generator through <<task_generatesite>>, you sometimes need a real static server locally running to preview the results.
+
+This task will start a jetty with your generated site.
+
+NOTE: When you use WSL to execute this command, you will need the IP V6 address of localhost `[::1]` to access the server.
+`127.0.0.1` or `localhost` will not work.
+
+NOTE: Most site themes don't need the static site server for general content.
+You can just preview the site by opening it right from the filesystem in your browser.
+But some javascript features will not work because of CORS restrictions.

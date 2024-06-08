@@ -1,0 +1,33 @@
+plugins {
+    id 'org.asciidoctor.jvm.convert' version '3.3.2' // Use the correct Asciidoctor plugin
+    id 'java'
+    id 'groovy'
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'org.asciidoctor:asciidoctorj:2.4.3'
+    implementation 'org.asciidoctor:asciidoctorj-pdf:1.5.3'
+    implementation 'org.codehaus.groovy:groovy-all:3.0.7'
+    testImplementation 'org.spockframework:spock-core:2.0-groovy-3.0'
+    testImplementation 'org.gradle:gradle-test-kit:7.5'
+}
+
+// Define a task for generating documentation
+tasks.register('generateDocs', org.asciidoctor.gradle.jvm.AsciidoctorTask) {
+    sourceDir = file('src/docs/asciidoc')
+    sources {
+        include 'index.adoc' // specify your main adoc file
+    }
+    outputOptions {
+        backends 'html', 'pdf'
+        outputDir file("${buildDir}/docs")
+    }
+}
+
+tasks.build {
+    dependsOn tasks.named('generateDocs')
+}

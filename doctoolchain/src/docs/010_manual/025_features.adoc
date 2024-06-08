@@ -1,0 +1,10 @@
+//tag::install[]
+
+:filename: 010_manual/025_features.adoc
+
+== Features
+
+include::../_feedback.adoc[]
+
+docToolchain implements quite a lot of features via scripts which you call through the command line.
+We call these `tasks` and they are listed under the top-level menu <<tasks, Tasks>> in this documentation.

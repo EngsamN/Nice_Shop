@@ -1,0 +1,9 @@
+:filename: 030_news/index.adoc
+:jbake-title: Overview
+:jbake-type: news
+:jbake-status: published
+//wird über das news.gsp-template gerendered
+
+== Overview
+
+Find all published news on this page.

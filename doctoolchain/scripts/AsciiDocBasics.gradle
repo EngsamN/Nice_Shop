@@ -1,0 +1,351 @@
+/*
+ * This build file is part of the docToolchain
+ */
+buildscript {
+    repositories {
+        maven {
+            url mavenRepository
+        }
+    }
+    dependencies {
+        classpath 'org.asciidoctor:asciidoctor-gradle-plugin:1.5.3'
+    }
+}
+import org.asciidoctor.gradle.AsciidoctorTask
+
+def color = { color, text ->
+    def colors = [black: 30, red: 31, green: 32, yellow: 33, blue: 34, magenta: 35, cyan: 36, white: 37]
+    return new String((char) 27) + "[${colors[color]}m${text}" + new String((char) 27) + "[0m"
+}
+
+// configuration
+if (docDir.startsWith('.')) {
+    docDir = new File(projectDir, docDir).canonicalPath
+}
+logger.info "docToolchain> docDir: ${docDir}"
+logger.info "docToolchain> mainConfigFile: ${mainConfigFile}"
+logger.info "docToolchain> projectDir: ${projectDir}"
+def configSlurper = new ConfigSlurper()
+def configFile = new File(docDir, mainConfigFile)
+if (configFile.exists()) {
+    //ok - nothing to do
+} else {
+    println "\n${color 'green', """Config file '${configFile.canonicalPath}' does not exist' """}"
+    def input = ant.input(message: "\n${color 'green', 'do you want me to create a default one for you?'}", validargs: 'y,n', addproperty: 'yesno')
+    if (ant.yesno=="y") {
+        configFile.write(new File("./template_config/Config.groovy").text)
+    } else {
+        throw new Exception("can't continue without a config file")
+    }
+}
+config = configSlurper.parse(configFile.text)
+pdfThemeDir = config.pdfThemeDir?config.pdfThemeDir:''
+if (pdfThemeDir.startsWith('.')) {
+    pdfThemeDir = new File(docDir, pdfThemeDir).canonicalPath
+}
+logger.info "docToolchain> pdfThemeDir: ${pdfThemeDir}"
+inputPath = config.inputPath?config.inputPath:'.'
+logger.info "docToolchain> inputPath: ${inputPath}"
+def props = project.gradle.startParameter.projectProperties
+logger.info("\nGradle project Properties [${props.size()}]:\n${props}\n==============================")
+
+if (project.hasProperty('jiraUser') && project.hasProperty('jiraPass')) {
+    logger.info("Found passed Jira credentials")
+    config.jira.credentials = "${project.getProperty('jiraUser')}:${project.getProperty('jiraPass')}".bytes.encodeBase64().toString()
+}
+if (project.hasProperty('confluenceUser') && project.hasProperty('confluencePass')) {
+    logger.info("Found passed Confluence credentials")
+    config.confluence.credentials = "${project.getProperty('confluenceUser')}:${project.getProperty('confluencePass')}".bytes.encodeBase64().toString()
+}
+if (project.hasProperty('username') && project.hasProperty('password')) {
+    logger.info("Found passed common Jira & Confluence credentials")
+    config.jira.credentials = "${project.getProperty('username')}:${project.getProperty('password')}".bytes.encodeBase64().toString()
+    config.confluence.credentials = "${project.getProperty('username')}:${project.getProperty('password')}".bytes.encodeBase64().toString()
+}
+
+referenceDocFile = config.referenceDocFile?config.referenceDocFile:''
+logger.info "docToolchain> referenceDocFile: ${referenceDocFile}"
+logger.info("\n==================\nParsed config file has ${config.flatten().size()} entries\n")
+
+List<String> confidentialIdentifiers = ["credential", "token", "secret"]
+config.flatten().each {key, value ->
+    String keyString = "${key}"
+
+    if(confidentialIdentifiers.any {id -> keyString.toLowerCase().contains(id)}){
+        logger.info("Found config -> '${keyString}': '********'")
+    }else{
+        logger.info("Found config -> '${keyString}': '${value}'")
+    }
+}
+
+ext {
+    srcDir  = "${docDir}/${inputPath}"
+    if (config.outputPath.startsWith('/')) {
+        targetDir = config.outputPath
+    } else {
+        targetDir = "${docDir}/${config.outputPath}"
+    }
+    javaVersion = System.getProperty("java.version")
+    currentDate = new Date().format("d. MMM yyyy")
+    // where HTMLSanityCheck checking results ares stored
+    checkingResultsPath = "${docDir}/${config.outputPath}/report/htmlchecks"
+    sourceFiles = config.inputFiles
+}
+
+
+
+dependencies {
+    implementation 'org.asciidoctor:asciidoctorj-pdf:1.5.3'
+    implementation 'org.asciidoctor:asciidoctorj-diagram:2.1.2'
+}
+
+
+asciidoctorj {
+    version = '1.6.2'
+}
+
+//tag::AsciidoctorTask[]
+
+// common settings for asciidoctor
+// this is needed for PDF generation with plantUML
+tasks.withType(org.asciidoctor.gradle.AsciidoctorTask) { docTask ->
+
+    config.taskInputsDirs.each {
+        inputs.dir new File(docDir, it)
+    }
+    config.taskInputsFiles.each {
+        inputs.file new File(docDir, it)
+    }
+
+    // configure source and output files and folders
+    outputDir = file(targetDir)
+    sourceDir = file(srcDir)
+    attributes  (
+ //           'pdf-stylesdir': "${pdfThemeDir}@",
+ //           'pdf-style': "custom@",
+ //           'pdf-fontsdir': "${pdfThemeDir}/fonts@",
+            'source-highlighter': 'highlightjs@',
+            'imagesdir': 'images@',
+            'toc': 'left@',
+            'icons': 'font@',
+            'javaVersion'         : "$javaVersion",
+            'currentDate'         : "$currentDate",
+            'allow-uri-read'      : 'true@',
+            'sectanchors'         : 'true@',
+            'targetDir'           : targetDir,
+            'docDir'              : docDir,
+            'projectRootDir'          : "${projectDir}@",
+    )
+    // Here we can add the code for extensions we write.
+    extensions {
+        inlinemacro (name: "jira") {
+            parent, target, attributes ->
+                options = [
+                        "type": ":link",
+                        "target": jiraRoot+"/browse/${target}".toString(),
+                        "id": "${target}"
+                ]
+
+                // Create the link to the issue.
+                createPhraseNode(parent, "anchor", target, attributes, options).render()
+        }
+    }
+
+    // good to see what the build is doing...
+    logDocuments = true
+
+    requires = ['asciidoctor-diagram']
+
+}
+//end::AsciidoctorTask[]
+
+
+
+//tag::generateHTML[]
+task generateHTML (
+        type: AsciidoctorTask,
+        group: 'docToolchain',
+        description: 'use html5 as asciidoc backend') {
+        attributes (
+            'plantUMLDir'         : file("${docDir}/${config.outputPath}/html5").toURI().relativize(new File("${docDir}/${config.outputPath}/html5/plantUML/").toURI()).getPath(),
+        )
+
+    // specify output folder explicitly to avoid cleaning targetDir from other generated content
+    outputDir = file(targetDir + '/html5/')
+    separateOutputDirs(false)
+
+    def sourceFilesHTML = sourceFiles.findAll {
+                                'html' in it.formats
+                            }
+//    onlyIf {
+//        sourceFilesHTML
+//    }
+
+    sources {
+        sourceFilesHTML.each {
+            include it.file
+            println it.file
+        }
+    }
+    resources {
+        config.imageDirs.each { imageDir ->
+            from(new File(file(srcDir),imageDir))
+            logger.info ('imageDir: '+imageDir)
+        }
+        into './images'
+    }
+    backends = ['html5']
+doFirst {
+    if (sourceFilesHTML.size()==0) {
+        throw new Exception ("""
+
+>> No source files defined for type HTML.
+>> Please specify at least one inputFile in your docToolchainConfig.groovy
+""")
+    }
+
+}
+}
+//end::generateHTML[]
+
+//tag::generatePDF[]
+task generatePDF (
+        type: AsciidoctorTask,
+        group: 'docToolchain',
+        description: 'use pdf as asciidoc backend') {
+
+    attributes (
+        'plantUMLDir'         : file("${docDir}/${config.outputPath}/pdf/images/plantUML/").path,
+    )
+
+    attributes (
+        'data-uri': 'true',
+        'plantUMLDir'         : file("${docDir}/${config.outputPath}/images/").path,
+        'imagesoutdir'        : file("${docDir}/${config.outputPath}/images/").path
+    )
+
+    def sourceFilesPDF = sourceFiles.findAll {
+        'pdf' in it.formats
+    }
+//    onlyIf {
+//        sourceFilesPDF
+//    }
+
+    sources {
+        sourceFilesPDF.each {
+            include it.file
+        }
+    }
+
+    backends = ['pdf']
+    /**
+    //check if a remote pdfTheme is defined
+    def pdfTheme = System.getenv('DTC_PDFTHEME')
+    def themeFolder = pdfTheme.md5()
+    if (pdfTheme) {
+        //check if it is already installed
+        //TODO: finish this...
+    }
+    **/
+    doFirst {
+            if (sourceFilesPDF.size()==0) {
+                throw new Exception ("""
+
+    >> No source files defined for type PDF.
+    >> Please specify at least one inputFile in your docToolchainConfig.groovy
+    """)
+            }
+
+    }
+}
+//end::generatePDF[]
+
+//tag::generateDocbook[]
+task generateDocbook (
+        type: AsciidoctorTask,
+        group: 'docToolchain',
+        description: 'use docbook as asciidoc backend') {
+
+    def sourceFilesDOCBOOK = sourceFiles.findAll {
+        'docbook' in it.formats
+    }
+//    onlyIf {
+//        sourceFilesDOCBOOK
+//    }
+
+    sources {
+        sourceFilesDOCBOOK.each {
+            include it.file
+        }
+    }
+
+    backends = ['docbook']
+    doFirst {
+        if (sourceFilesDOCBOOK.size()==0) {
+            throw new Exception ("""
+
+    >> No source files defined for type docbook.
+    >> Please specify at least one inputFile in your docToolchainConfig.groovy
+    """)
+        }
+
+    }
+}
+//end::generateDocbook[]
+
+//tag::generateDeck[]
+task generateDeck (
+        type: AsciidoctorTask,
+        group: 'docToolchain',
+        description: 'use revealJs as asciidoc backend to create a presentation') {
+
+    attributes (
+            'idprefix': 'slide-',
+            'idseparator': '-',
+            'docinfo1': '',
+            'revealjs_theme': 'black',
+            'revealjs_progress': 'true',
+            'revealjs_touch': 'true',
+            'revealjs_hideAddressBar': 'true',
+            'revealjs_transition': 'linear',
+            'revealjs_history': 'true',
+            'revealjs_slideNumber': 'true'
+    )
+    options template_dirs : [new File(new File (projectDir,'/resources/asciidoctor-reveal.js'),'templates').absolutePath ]
+
+    def sourceFilesREVEAL = sourceFiles.findAll {
+        'revealjs' in it.formats
+    }
+//    onlyIf {
+//        sourceFilesREVEAL
+//    }
+
+    sources {
+        sourceFilesREVEAL.each {
+            include it.file
+        }
+    }
+
+    outputDir = file(targetDir+'/decks/')
+
+    resources {
+        from('resources') {
+            include 'reveal.js/**'
+        }
+        from(sourceDir) {
+            include 'images/**'
+        }
+        into("")
+        logger.info "${docDir}/${config.outputPath}/images"
+    }
+    doFirst {
+        if (sourceFilesREVEAL.size()==0) {
+            throw new Exception ("""
+    >> No source files defined for type 'revealjs'.
+    >> Please specify at least one inputFile in your docToolchainConfig.groovy
+    """)
+        }
+
+    }
+}
+//end::generateDeck[]

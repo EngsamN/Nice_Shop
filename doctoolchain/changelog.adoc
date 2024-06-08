@@ -1,0 +1,330 @@
+== Changelog
+
+All notable changes to this project will be documented in this file.
+
+The format is based on https://keepachangelog.com/en/1.0.0/[Keep a Changelog],
+and this project tries to adhere to https://semver.org/spec/v2.0.0.html[Semantic Versioning].
+
+== Unreleased
+
+=== added
+
+=== changed
+
+=== fixed
+
+== 2.0.1 - 2021-10-06
+
+=== added
+
+2021-10-06::
+* experimental: globalReferences
+
+=== changed
+
+2021-10-04::
+* fix https://github.com/docToolchain/docToolchain/issues/616[#616 - exportOpenAPI: Enhance the Confluence Open-API Documentation API to refer to URLs]
+
+=== fixed
+
+2021-10-06::
+* fix https://github.com/docToolchain/docToolchain/issues/636[#636 - theme: larger admonition icons]
+* fix https://github.com/docToolchain/docToolchain/issues/649[#649 - generateSite on powershell wrong file-separator]
+2021-10-04::
+* fix https://github.com/docToolchain/docToolchain/issues/645[#645 - exportJiraIssues: Could not get unknown property 'configFile' for task ':exportJiraIssues' of type org.gradle.api.DefaultTask]
+
+2021-09-30::
+* fix https://github.com/docToolgchain/docToolchain/issues/632[#632 - generateHTML: broken images with generateHTML]
+
+== 2.0.0 - 2021-09-23
+
+The 2.0.0 relase contains all changes of the release candidates.
+See "https://doctoolchain.github.io/docToolchain/v2.0.x/030_news/2021/2.0.0-release.html[v2.0.0 of docToolchain has been released!]" for more details.
+
+== 2.0.0-rc17 - 2021-09-22
+
+=== changed
+
+2021-09-22::
+* streamingExecute (exportPPT, exportEA) now emits a note instead ot an error when running on linux
+* brushed up powershell wrapper
+
+== 2.0.0-rc16 - 2021-09-21
+
+=== added
+
+2021-09-21::
+* added lunrjs as local search engine
+
+=== fixed
+
+2021-09-21::
+* updated exportContributors to follow moved files
+* fixed downloadTemplate
+
+== 2.0.0-rc15 - 2021-09-18
+
+=== added
+
+2021-09-06::
+* added warning when running on WSL
+* added dtcw.bat to avoid execution restrictions
+* updated developer docs
+* added docsy as theme
+
+=== fixed
+
+2021-09-18::
+* fixed favicons
+* fixed blog
+
+== 2.0.0-rc14 - 2021-05-22
+
+=== added
+2021-05-21::
+* if the outputPath from the config starts with a '/', it will be considered as absolute path. +
+This way, you can move the build fodler outside of your repository. +
+`outputPath = System.getenv('HOME')+'/.doctoolchain/build/'+(new File('.')).canonicalPath.md5()`
+* repository theme gets only copied to build if it is defined in `siteFolder`
+* generateSite will now add meta-data to all asciidoc files which have no meta-data defined. The menu name and order will be created corresponding to the folder and file name. The title will be extracted as first headline from the file itself.
+2021-05-18::
+* Headless mode for themes
+* fix landing page (only gets copied once when microsite config isn't set yet.)
+
+=== changed
+
+=== fixed
+
+2021-05-22::
+* fix copyThemes to also copy the external theme
+2021-05-06::
+* fix #574: publishToConfluence: Problem with wrong ancestorId
+2021-04-28::
+* fix copyImages for generateSite
+
+== 1.4.0 - 2021-05-21
+
+=== Added
+
+2021-05-21::
+* removed jCenter references
+
+2021-03-21::
+
+* https://github.com/docToolchain/docToolchain/pull/560[Add support for another OpenAPI Confluence macro] by https://github.com/silverdonkey[Nikolay Orozov]
+
+=== Changed
+
+2021-04-07::
+
+* https://github.com/docToolchain/docToolchain/pull/564[set plantUMLDir for all generate-Tasks]
+
+=== Fixed
+
+2021-05-06::
+* fix #574: publishToConfluence: Problem with wrong ancestorId
+
+2021-04-29::
+* exportEA hang after all exports are done since EA v15.2 #570 (PeterStange)
+
+== Version: 2.0.0-rc13
+
+=== added
+
+2021-04-07::
+* generateSite can now handle themes
+2021-04-09::
+* downloadTemplate can now handle further templates
+
+== Version: 2.0.0-rc4
+
+=== fixed
+
+2012-03-02::
+* removed default imagesdir for generateSite
+
+== Version: 2.0.0-rc3
+
+=== fixed
+
+2012-03-01::
+* fixed imagesdir typo
+
+== Version: 2.0.0-rc2
+
+=== fixed
+
+2012-03-01::
+* updated docs for generateSite
+* fixed menu for generateSite
+
+2012-02-27::
+* fixed createDist task
+* fixed plantUML for generatePDF
+* fixed plantUML for generateSite
+
+== Version: 2.0.0-rc1
+
+=== added
+
+2012-02-26::
+* copyThemes task
+* generateSite task
+2021-02-23::
+* first version of powershell wrapper
+2021-02-22::
+* manual test script
+2021-01-05::
+* dtc wrapper
+2021-01-08::
+* first definition of a static site taken from arc42-template-project
+* updated gradle wrapper (6.6.1)
+* added downloadTemplates task
+* added feature to automatically create a Config file if it doesn't exist
+* configured gradle to run without daemon
+
+=== fixed
+2021-02-24::
+* [543] dtcw: added pre-requisites check and alternative curl instead of wget
+2021-02-22::
+* handling of images for generateHTML
+
+== Version 1.3.1
+=== Added
+
+=== Changed
+
+=== Fixed
+
+2021-02-28::
+* doctoolchain.bat can now handle java properties
+
+== 1.3.1 - 2021-02-27
+
+=== Added
+
+2021-01-29::
+* [519] - Describe release process, update changelog
+* smaller distribution file through createDist task
+
+2021-01-26::
+* [522] - Added sdkman file
+
+2021-01-25::
+* [522] - Support for JDK 14
+* [514] - Add support of multiple EA project locations in parallel
+
+=== Changed
+
+2021-01-25::
+* Add support of multiple EA project locations in parallel #514
+* updated Gradle to 6.7.1
+* added JDK14 for travis-ci testing
+* [517] - update revealJs to 3.9.1 and asciidoctor-revealjs to 2.0.1
+
+=== Fixed
+
+2021-02-22:
+- [535] - add initArc42RU task
+2021-02-10:
+- [530] - fix writing of diagram attributes using exportEA
+
+2021-01-25::
+* [523] - fix for generateDeck
+
+2021-01-25::
+* fixed docs: ConfluenceConfig.groovy missing #492
+
+== 1.3.0 - 2021-01-20
+
+=== Added
+
+2021-01-05::
+* Add properties for htmlSanityCheck #507
+
+2020-09-07::
+* Ability to export Jira Sprint(s) data changelog (key, summary) (https://github.com/docToolchain/docToolchain/pull/473[#473])
+
+
+== 1.2.0 - 2020-02-09
+
+=== Added
+
+2020-08-24::
+* Ability to export OpenAPI specification to asciidoc (https://github.com/docToolchain/docToolchain/issues/464[#464])
+
+2020-08-20::
+* New attribute 'ancestorName' for easier nesting in Confluence (https://github.com/docToolchain/docToolchain/issues/460[#460])
+
+2020-07-08::
+* Jira configuration for multiple request to Jira API
+* Saving Jira results to Excel files
+* Basic support for custom fields in Jira results
+
+2020-05-08::
+* Jira configuration refactoring to Config.groovy
+
+2019-05-21::
+* first version of EA-PlantUML Exchange scripts
+
+2019-02-26::
+* first version of `exportMetrics` task
+https://github.com/docToolchain/docToolchain/commit/c25ac52e43ccb1d45fa538c06d376258b41e8e32[c25ac52e], https://github.com/docToolchain/docToolchain/commit/a752acfb00206b3ac875b9ab585cd54e9d8fde89[a752acfb]
+
+2019-03-08::
+* Add TomTom logo as company who uses docToolchain https://github.com/docToolchain/docToolchain/pull/284[PR#284]
+
+
+== 1.1.0 - 2020-08-31
+
+=== Added
+
+2020-08-06::
+* publishToConfluence
+** https://github.com/docToolchain/docToolchain/pull/445[#445 Publish to confluence jira macro support]
+
+=== Changed
+
+2019-05-09::
+* upgraded to run with JDK11
+** upgraded Gradle to 5.3.1
+** upgraded Groovy to 2.5.4 (comes with Gradle 5.4.1)
+** upgraded Spock to 1.3
+
+2019-03-13::
+* prependFilename
+** fixed proper handling of file encoding
+** brushed up logging
+** `config.*`, `_config.*`, `feedback.*`, `_feedback.*` are excluded
+
+2019-03-08::
+* asciidoc2confluence
+** added output where docs are published to and added better error message in case of failing authorization https://github.com/docToolchain/docToolchain/commit/1bc146ccc493b4c381cb09742ac71ef44265d990[1bc146c]
+
+2019-03-06::
+* collectIncludes
+** changed regexp to accept ^[A-Z]{3,}-.*$ as file name, eg. all Files which start with an upper case word of at least 3 chars followed by a dash
+** fixed `sourceFolder` to work with docToolchain as submodule
+** added better console output
+** skip `docToolchain`-folder if used as submodule
+
+=== Fixed
+
+2021-25-01::
+* fixed docs: ConfluenceConfig.groovy missing #492
+
+2019-05-30::
+* fix publishToConfluence internal link targets (#223)
+2019-05-09::
+* fixed .bat (#305)
+* fixed tests (#307)
+
+2019-03-08::
+* asciidooc2confluence
+** #227 `spaceKey` was ignored https://github.com/docToolchain/docToolchain/pull/279/[PR#297]
+
+== Released
+
+2020-08-06::
+* publishToConfluence
+** https://github.com/docToolchain/docToolchain/pull/445[#445 Publish to confluence jira macro support]
