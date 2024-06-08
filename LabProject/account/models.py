@@ -26,7 +26,7 @@ class UserProfile(models.Model):
         return self.user.username
 
 
-    def info fun(self):
+    def infofun(self):
         """
         Returns a info info of the user profile.
 
