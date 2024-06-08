@@ -12,7 +12,7 @@ django.setup()
 extensions = [
     'sphinx.ext.autodoc',
     'sphinx.ext.viewcode',
-    'sphinx.ext.napoleon',  # If you use Google or NumPy style docstrings
+    'sphinx.ext.napoleon',
 ]
 
 # The master toctree document.
