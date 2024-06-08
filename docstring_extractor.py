@@ -1,6 +1,5 @@
 import os
 import sys
-import inspect
 
 def extract_docstrings(directory):
     for root, dirs, files in os.walk(directory):
@@ -8,19 +7,27 @@ def extract_docstrings(directory):
             if file.endswith('.py'):
                 filepath = os.path.join(root, file)
                 with open(filepath, 'r') as f:
-                    lines = f.readlines()
-                    for line in lines:
+                    in_docstring = False
+                    docstring_lines = []
+                    for line in f:
                         if '"""' in line:
-                            start_index = lines.index(line)
-                            for i in range(start_index + 1, len(lines)):
-                                if '"""' in lines[i]:
-                                    docstring = ''.join(lines[start_index + 1:i]).strip()
-                                    print(f"Docstring for {filepath}: {docstring}")
-                                    break
+                            if in_docstring:
+                                docstring = ''.join(docstring_lines).strip()
+                                print(f"Docstring for {filepath}: {docstring}")
+                                break
+                            else:
+                                in_docstring = True
+                                docstring_lines.append(line)
+                        elif in_docstring:
+                            docstring_lines.append(line)
+                            if '"""' in line:
+                                docstring = ''.join(docstring_lines).strip()
+                                print(f"Docstring for {filepath}: {docstring}")
+                                break
 
 if __name__ == "__main__":
     if len(sys.argv) != 2:
-        print("Usage:  python /home/samaih/Django_Shop/docstring_extractor.py /home/samaih/Django_Shop/LabProject")
+        print("Usage: python /home/samaih/Django_Shop/docstring_extractor.py /home/samaih/Django_Shop/LabProject")
         sys.exit(1)
 
     directory = sys.argv[1]
