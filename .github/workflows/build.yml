@@ -47,6 +47,7 @@ jobs:
         run: |
           export JAVA_HOME=$(dirname $(dirname $(readlink -f $(which java))))
           export PATH=$JAVA_HOME/bin:$PATH
+          java -version
           sonar-scanner \
             -Dsonar.projectKey=Django_Shop \
             -Dsonar.host.url=${{ secrets.SONAR_HOST_URL }} \
