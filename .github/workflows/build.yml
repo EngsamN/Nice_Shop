@@ -22,6 +22,10 @@ jobs:
           java-version: '17'
           distribution: 'adopt'
 
+      # Verify Java version
+      - name: Verify Java Version
+        run: java -version
+
       # Test the connection to the SonarQube server
       - name: Test SonarQube Connection
         run: |
@@ -41,6 +45,8 @@ jobs:
       # Run SonarQube scan
       - name: SonarQube Scan
         run: |
+          export JAVA_HOME=$(dirname $(dirname $(readlink -f $(which java))))
+          export PATH=$JAVA_HOME/bin:$PATH
           sonar-scanner \
             -Dsonar.projectKey=Django_Shop \
             -Dsonar.host.url=${{ secrets.SONAR_HOST_URL }} \
