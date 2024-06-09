@@ -14,7 +14,15 @@ jobs:
       - uses: actions/checkout@v2
         with:
           fetch-depth: 0  # Shallow clones should be disabled for better relevancy of analysis
-
+      # Print the SonarQube URL and token to verify they are correctly set
+      - name: Print SonarQube URL and Token
+      run: |
+        echo "SonarQube URL: ${{ secrets.SONAR_HOST_URL }}"
+        echo "SonarQube Token: ${{ secrets.SONAR_TOKEN }}"
+      env:
+        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
+        
       # Test the connection to the SonarQube server
       - name: Test SonarQube Connection
         run: |
