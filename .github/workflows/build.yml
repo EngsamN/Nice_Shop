@@ -24,7 +24,11 @@ jobs:
 
       # Verify Java version
       - name: Verify Java Version
-        run: java -version
+        run: |
+          java -version
+          which java
+          echo $JAVA_HOME
+          echo $PATH
 
       # Test the connection to the SonarQube server
       - name: Test SonarQube Connection
@@ -42,13 +46,13 @@ jobs:
           unzip sonar-scanner-cli.zip
           echo "$(pwd)/sonar-scanner-4.6.2.2472-linux/bin" >> $GITHUB_PATH
 
-      # Run SonarQube scan with explicit JAVA_HOME
+      # Run SonarQube scan with explicit JAVA_HOME and clean PATH
       - name: SonarQube Scan
         run: |
           export JAVA_HOME=$(dirname $(dirname $(readlink -f $(which java))))
-          export PATH=$JAVA_HOME/bin:$PATH
-          echo "Using JAVA_HOME=$JAVA_HOME"
+          export PATH=$JAVA_HOME/bin:$(echo $PATH | sed -e 's|:/usr/lib/jvm/[^:]*||g')
           java -version
+          which java
           ./sonar-scanner-4.6.2.2472-linux/bin/sonar-scanner \
             -Dsonar.projectKey=Django_Shop \
             -Dsonar.host.url=${{ secrets.SONAR_HOST_URL }} \
@@ -61,7 +65,7 @@ jobs:
       # Check the Quality Gate status
       - name: SonarQube Quality Gate check
         id: sonarqube-quality-gate-check
-        uses: sonarsource/sonarqube-quality-gate-action@master
+        uses: sonarsource/sonarqube-quality-gate-action@v1.0.0
         timeout-minutes: 5
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
