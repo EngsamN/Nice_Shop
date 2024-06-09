@@ -44,9 +44,10 @@ jobs:
         run: |
           curl -sSLo sonar-scanner-cli.zip https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-4.6.2.2472-linux.zip
           unzip sonar-scanner-cli.zip
-          echo "$(pwd)/sonar-scanner-4.6.2.2472-linux/bin" >> $GITHUB_PATH
+          export PATH=$(pwd)/sonar-scanner-4.6.2.2472-linux/bin:$PATH
+          echo "sonar-scanner installed"
 
-      # Run SonarQube scan with explicit JAVA_HOME and cleaned PATH
+      # Run SonarQube scan with explicit JAVA_HOME and PATH
       - name: SonarQube Scan
         run: |
           export JAVA_HOME=$(dirname $(dirname $(readlink -f $(which java))))
@@ -54,7 +55,7 @@ jobs:
           echo "Using JAVA_HOME=$JAVA_HOME"
           java -version
           which java
-          ./sonar-scanner-4.6.2.2472-linux/bin/sonar-scanner \
+          sonar-scanner \
             -Dsonar.projectKey=Django_Shop \
             -Dsonar.host.url=${{ secrets.SONAR_HOST_URL }} \
             -Dsonar.login=${{ secrets.SONAR_TOKEN }} \
