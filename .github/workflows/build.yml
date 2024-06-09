@@ -46,11 +46,12 @@ jobs:
           unzip sonar-scanner-cli.zip
           echo "$(pwd)/sonar-scanner-4.6.2.2472-linux/bin" >> $GITHUB_PATH
 
-      # Run SonarQube scan with explicit JAVA_HOME and clean PATH
+      # Run SonarQube scan with explicit JAVA_HOME and cleaned PATH
       - name: SonarQube Scan
         run: |
           export JAVA_HOME=$(dirname $(dirname $(readlink -f $(which java))))
-          export PATH=$JAVA_HOME/bin:$(echo $PATH | sed -e 's|:/usr/lib/jvm/[^:]*||g')
+          export PATH=$JAVA_HOME/bin:$PATH
+          echo "Using JAVA_HOME=$JAVA_HOME"
           java -version
           which java
           ./sonar-scanner-4.6.2.2472-linux/bin/sonar-scanner \
