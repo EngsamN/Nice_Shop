@@ -37,9 +37,6 @@ class UserProfile(models.Model):
 
     def infofun2(self):
         """
-        Returns a info info of the user profile.
-
-        Returns:
-            info: username
+        Returns a info info of the user profile
         """
         return self.user.username
