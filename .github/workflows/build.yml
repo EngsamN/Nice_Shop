@@ -16,6 +16,13 @@ jobs:
       with:
         # Disabling shallow clone is recommended for improving relevancy of reporting.
         fetch-depth: 0
+      # Test the connection to the SonarQube server
+    - name: Test SonarQube Connection
+      run: |
+        curl -u ${{ secrets.SONAR_TOKEN }}: ${{ secrets.SONAR_HOST_URL }}/api/server/version
+      env:
+        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
 
     # Triggering SonarQube analysis as results of it are required by Quality Gate check.
     - name: SonarQube Scan
