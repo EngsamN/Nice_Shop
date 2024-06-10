@@ -27,22 +27,11 @@ jobs:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         # Fail the job if the Quality Gate status is not PASSED
       # - name: Fail Job if Quality Gate Failed
-      #   if: steps.sonarqube-quality-gate-check.outputs.quality-gate-status != 'PASSED'
-      #   run: exit 1
-
-      # - name: Show SonarQube Quality Gate Status
-      #   run: echo "The Quality Gate status is ${{ steps.sonarqube-quality-gate-check.outputs.quality-gate-status }}"
-    
-      # Debugging step to print all outputs from sonarqube-quality-gate-check
-      - name: Print Quality Gate Outputs
-        run: |
-          echo "Quality Gate Status: ${{ steps.sonarqube-quality-gate-check.outputs.quality-gate-status }}"
-          echo "All Outputs: ${{ toJSON(steps.sonarqube-quality-gate-check.outputs) }}"
-
-      # Fail the job if the Quality Gate status is not PASSED
-      - name: Fail Job if Quality Gate Failed
-        if: steps.sonarqube-quality-gate-check.outputs.quality-gate-status != 'PASSED'
-        run: exit 1
-
-      - name: Show SonarQube Quality Gate Status
-        run: echo "The Quality Gate status is ${{ steps.sonarqube-quality-gate-check.outputs.quality-gate-status }}"
+     # Check the Quality Gate result manually
+     - name: Check Quality Gate Result
+     run: |
+       QUALITY_GATE_STATUS=$(cat .scannerwork/report-task.txt | grep -oP '(?<=status=)[A-Z]+')
+       echo "Quality Gate Status: $QUALITY_GATE_STATUS"
+       if [ "$QUALITY_GATE_STATUS" != "PASSED" ]; then
+         exit 1
+       fi
