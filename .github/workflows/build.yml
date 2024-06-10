@@ -26,7 +26,10 @@ jobs:
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         # Fail the job if the Quality Gate status is not PASSED
- 
+      # Debugging step to print the contents of the report-task.txt file
+      - name: Print Report Task File
+        run: cat .scannerwork/report-task.txt
+
       # Manually check the Quality Gate result
       - name: Check Quality Gate Result
         run: |
