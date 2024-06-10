@@ -29,15 +29,28 @@ jobs:
       # Debugging step to print the contents of the report-task.txt file
       - name: Print Report Task File
         run: cat .scannerwork/report-task.txt
-
-      # Manually check the Quality Gate result
+    
+        # Fetch and check the Quality Gate result
       - name: Check Quality Gate Result
         run: |
-          QUALITY_GATE_STATUS=$(grep -oP '(?<=status=)[A-Z]+' .scannerwork/report-task.txt)
-          echo "Quality Gate Status: $QUALITY_GATE_STATUS"
-          if [ "$QUALITY_GATE_STATUS" != "PASSED" ]; then
+          if [ -f .scannerwork/report-task.txt ]; then
+            CE_TASK_URL=$(grep -oP '(?<=ceTaskUrl=).*' .scannerwork/report-task.txt)
+            echo "CE Task URL: $CE_TASK_URL"
+            TASK_STATUS=$(curl -s "$CE_TASK_URL" | jq -r '.task.status')
+            if [ "$TASK_STATUS" == "SUCCESS" ]; then
+              QUALITY_GATE_STATUS=$(curl -s "$CE_TASK_URL" | jq -r '.task.analysisId' | xargs -I {} curl -s "$SONAR_HOST_URL/api/qualitygates/project_status?analysisId={}" | jq -r '.projectStatus.status')
+              echo "Quality Gate Status: $QUALITY_GATE_STATUS"
+              if [ "$QUALITY_GATE_STATUS" != "OK" ]; then
+                exit 1
+              fi
+            else
+              echo "Task status is not SUCCESS: $TASK_STATUS"
+              exit 1
+            fi
+          else
+            echo "report-task.txt file not found."
             exit 1
           fi
 
-      - name: Show SonarQube Quality Gate Status
-        run: echo "The Quality Gate status is $QUALITY_GATE_STATUS"
+    - name: Show SonarQube Quality Gate Status
+      run: echo "The Quality Gate status is $QUALITY_GATE_STATUS"
