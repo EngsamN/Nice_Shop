@@ -37,9 +37,16 @@ jobs:
           if [ -f .scannerwork/report-task.txt ]; then
             CE_TASK_URL=$(grep -oP '(?<=ceTaskUrl=).*' .scannerwork/report-task.txt)
             echo "CE Task URL: $CE_TASK_URL"
-            TASK_STATUS=$(curl -s "$CE_TASK_URL" | jq -r '.task.status')
+            TASK_RESPONSE=$(curl -s "$CE_TASK_URL")
+            echo "Task Response: $TASK_RESPONSE"
+            TASK_STATUS=$(echo "$TASK_RESPONSE" | jq -r '.task.status')
+            echo "Task Status: $TASK_STATUS"
             if [ "$TASK_STATUS" == "SUCCESS" ]; then
-              QUALITY_GATE_STATUS=$(curl -s "$CE_TASK_URL" | jq -r '.task.analysisId' | xargs -I {} curl -s "$SONAR_HOST_URL/api/qualitygates/project_status?analysisId={}" | jq -r '.projectStatus.status')
+              ANALYSIS_ID=$(echo "$TASK_RESPONSE" | jq -r '.task.analysisId')
+              echo "Analysis ID: $ANALYSIS_ID"
+              QUALITY_GATE_RESPONSE=$(curl -s "$SONAR_HOST_URL/api/qualitygates/project_status?analysisId=$ANALYSIS_ID")
+              echo "Quality Gate Response: $QUALITY_GATE_RESPONSE"
+              QUALITY_GATE_STATUS=$(echo "$QUALITY_GATE_RESPONSE" | jq -r '.projectStatus.status')
               echo "Quality Gate Status: $QUALITY_GATE_STATUS"
               if [ "$QUALITY_GATE_STATUS" != "OK" ]; then
                 exit 1
