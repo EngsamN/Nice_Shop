@@ -6,14 +6,3 @@
  * This project uses @Incubating APIs which are subject to change.
  */
 apply from: 'docToolchainConfig.groovy'
-plugins {
-    id "org.sonarqube" version "3.3"
-}
-
-sonarqube {
-    properties {
-        property "sonar.projectKey", "Django_Shop"
-        property "sonar.host.url", "https://sonarqube.fintechsys.net"
-        property "sonar.login", "sqp_874d6a30a0476351d7ad3a6241a14abd1ccf18c9"
-    }
-}
