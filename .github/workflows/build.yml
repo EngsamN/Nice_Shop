@@ -28,10 +28,10 @@ jobs:
         # Fail the job if the Quality Gate status is not PASSED
       # - name: Fail Job if Quality Gate Failed
      # Check the Quality Gate result manually
-     - name: Check Quality Gate Result
-     run: |
-       QUALITY_GATE_STATUS=$(cat .scannerwork/report-task.txt | grep -oP '(?<=status=)[A-Z]+')
-       echo "Quality Gate Status: $QUALITY_GATE_STATUS"
-       if [ "$QUALITY_GATE_STATUS" != "PASSED" ]; then
-         exit 1
-       fi
+      - name: Check Quality Gate Result
+        run: |
+          QUALITY_GATE_STATUS=$(cat .scannerwork/report-task.txt | grep -oP '(?<=status=)[A-Z]+')
+          echo "Quality Gate Status: $QUALITY_GATE_STATUS"
+          if [ "$QUALITY_GATE_STATUS" != "PASSED" ]; then
+            exit 1
+          fi
