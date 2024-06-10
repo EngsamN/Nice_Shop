@@ -5,32 +5,33 @@ on:
     branches:
       - main
 
-
 jobs:
   build:
     name: Build
     runs-on: ubuntu-latest
     permissions: read-all
+
     steps:
       - uses: actions/checkout@v2
         with:
-          fetch-depth: 0  # Shallow clones should be disabled for a better relevancy of analysis
+          fetch-depth: 0  # Shallow clones should be disabled for better relevancy of analysis
+
       - uses: sonarsource/sonarqube-scan-action@master
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
           SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
-      # If you wish to fail your job when the Quality Gate is red, uncomment the
-      # following lines. This would typically be used to fail a deployment.
+
       - uses: sonarsource/sonarqube-quality-gate-action@master
+        id: sonarqube-quality-gate-check
         timeout-minutes: 5
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-        # Fail the job if the Quality Gate status is not PASSED
+
       # Debugging step to print the contents of the report-task.txt file
       - name: Print Report Task File
         run: cat .scannerwork/report-task.txt
-    
-        # Fetch and check the Quality Gate result
+
+      # Fetch and check the Quality Gate result
       - name: Check Quality Gate Result
         run: |
           if [ -f .scannerwork/report-task.txt ]; then
@@ -52,5 +53,5 @@ jobs:
             exit 1
           fi
 
-    - name: Show SonarQube Quality Gate Status
-      run: echo "The Quality Gate status is $QUALITY_GATE_STATUS"
+      - name: Show SonarQube Quality Gate Status
+        run: echo "The Quality Gate status is $QUALITY_GATE_STATUS"
