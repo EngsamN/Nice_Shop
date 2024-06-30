@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>&lt;no title&gt; &#8212; Django Shop 0.1 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=b3523f8e" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/alabaster.css?v=039e1c02" />
+    <script data-url_root="../../../../" id="documentation_options" src="../../../../_static/documentation_options.js?v=e031e9a9"></script>
+    <script src="../../../../_static/doctools.js?v=888ff710"></script>
+    <script src="../../../../_static/sphinx_highlight.js?v=4825356b"></script>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" />
+    <link rel="next" title="&lt;no title&gt;" href="04_solution_strategy.html" />
+    <link rel="prev" title="&lt;no title&gt;" href="02_architecture_constraints.html" />
+   
+  <link rel="stylesheet" href="../../../../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <p>ifndef::imagesdir[:imagesdir: ../images]</p>
+<p>[[section-context-and-scope]]
+== Context and Scope</p>
+<p>ifdef::arc42help[]
+[role=”arc42help”]
+<a href="#id1"><span class="problematic" id="id2">**</span></a>**
+.Contents
+Context and scope - as the name suggests - delimits your system (i.e. your scope) from all its communication partners
+(neighboring systems and users, i.e. the context of your system). It thereby specifies the external interfaces.</p>
+<p>If necessary, differentiate the business context (domain specific inputs and outputs) from the technical context (channels, protocols, hardware).</p>
+<p>.Motivation
+The domain interfaces and technical interfaces to communication partners are among your system’s most critical aspects. Make sure that you completely understand them.</p>
+<p>.Form
+Various options:</p>
+<ul class="simple">
+<li><p>Context diagrams</p></li>
+<li><p>Lists of communication partners and their interfaces.</p></li>
+</ul>
+<p>.Further Information</p>
+<p>See <a class="reference external" href="https://docs.arc42.org/section-3/[Context">https://docs.arc42.org/section-3/[Context</a> and Scope] in the arc42 documentation.</p>
+<p>=== Business Context</p>
+<p>ifdef::arc42help[]
+[role=”arc42help”]
+<a href="#id3"><span class="problematic" id="id4">**</span></a>**
+.Contents
+Specification of <em>all</em> communication partners (users, IT-systems, …) with explanations of domain specific inputs and outputs or interfaces.
+Optionally you can add domain specific formats or communication protocols.</p>
+<p>.Motivation
+All stakeholders should understand which data are exchanged with the environment of the system.</p>
+<p>.Form
+All kinds of diagrams that show the system as a black box and specify the domain interfaces to communication partners.</p>
+<p>Alternatively (or additionally) you can use a table.
+The title of the table is the name of your system, the three columns contain the name of the communication partner, the inputs, and the outputs.</p>
+<p><strong>&lt;Diagram or Table&gt;</strong></p>
+<p><strong>&lt;optionally: Explanation of external domain interfaces&gt;</strong></p>
+<p>=== Technical Context</p>
+<p>ifdef::arc42help[]
+[role=”arc42help”]
+<a href="#id5"><span class="problematic" id="id6">**</span></a>**
+.Contents
+Technical interfaces (channels and transmission media) linking your system to its environment. In addition a mapping of domain specific input/output to the channels, i.e. an explanation which I/O uses which channel.</p>
+<p>.Motivation
+Many stakeholders make architectural decision based on the technical interfaces between the system and its context. Especially infrastructure or hardware designers decide these technical interfaces.</p>
+<p>.Form
+E.g. UML deployment diagram describing channels to neighboring systems,
+together with a mapping table showing the relationships between channels and input/output.</p>
+<p><strong>&lt;Diagram or Table&gt;</strong></p>
+<p><strong>&lt;optionally: Explanation of technical interfaces&gt;</strong></p>
+<p><strong>&lt;Mapping Input/Output to Channels&gt;</strong></p>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../../../../index.html">Django Shop</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../api.html">API Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="07_deployment_view.html">For multiple environments or alternative deployments please copy and adapt this section of arc42 for all relevant environments.</a></li>
+<li class="toctree-l1"><a class="reference internal" href="07_deployment_view.html#please-copy-the-structure-from-level-1-for-each-selected-element">Please copy the structure from level 1 for each selected element.</a></li>
+<li class="toctree-l1"><a class="reference internal" href="08_concepts.html">See https://docs.arc42.org/section-8/[Concepts] in the arc42 documentation.</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../../../index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="02_architecture_constraints.html" title="previous chapter">&lt;no title&gt;</a></li>
+      <li>Next: <a href="04_solution_strategy.html" title="next chapter">&lt;no title&gt;</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 7.1.2</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.13</a>
+      
+      |
+      <a href="../../../../_sources/arch42/EN/asciidoc/src/03_context_and_scope.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

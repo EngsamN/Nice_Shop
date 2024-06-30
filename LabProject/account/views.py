@@ -1,37 +1,16 @@
-# account/views.py
+from django.http import JsonResponse
 
-from django.shortcuts import render
-from django.http import HttpResponse
-from django.views import View
-
-def home(request):
+def example_view(request):
     """
-    View function for the home page of the site.
+    Example view function that returns a JSON response.
 
     Args:
         request (HttpRequest): The request object.
 
     Returns:
-        HttpResponse: The response containing the rendered template.
+        JsonResponse: A JSON response containing a greeting message.
     """
-    return HttpResponse("Welcome to the Home Page")
-
-class HomeView(View):
-    """
-    Class-based view for the home page.
-
-    Methods:
-        get: Handles GET requests.
-    """
-
-    def get(self, request):
-        """
-        Handles GET requests.
-
-        Args:
-            request (HttpRequest): The request object.
-
-        Returns:
-            HttpResponse: The response containing the rendered template.
-        """
-        return HttpResponse("Welcome to the Home Page")
+    data = {
+        'message': 'Hello, world!'
+    }
+    return JsonResponse(data)

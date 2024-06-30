@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>See https://docs.arc42.org/section-8/[Concepts] in the arc42 documentation. &#8212; Django Shop 0.1 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=b3523f8e" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/alabaster.css?v=039e1c02" />
+    <script data-url_root="../../../../" id="documentation_options" src="../../../../_static/documentation_options.js?v=e031e9a9"></script>
+    <script src="../../../../_static/doctools.js?v=888ff710"></script>
+    <script src="../../../../_static/sphinx_highlight.js?v=4825356b"></script>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" />
+    <link rel="next" title="&lt;no title&gt;" href="09_architecture_decisions.html" />
+    <link rel="prev" title="For multiple environments or alternative deployments please copy and adapt this section of arc42 for all relevant environments." href="07_deployment_view.html" />
+   
+  <link rel="stylesheet" href="../../../../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <p>ifndef::imagesdir[:imagesdir: ../images]</p>
+<p>[[section-concepts]]
+== Cross-cutting Concepts</p>
+<p>ifdef::arc42help[]
+[role=”arc42help”]
+<a href="#id1"><span class="problematic" id="id2">**</span></a>**
+.Content
+This section describes overall, principal regulations and solution ideas that are relevant in multiple parts (= cross-cutting) of your system.
+Such concepts are often related to multiple building blocks.
+They can include many different topics, such as</p>
+<ul class="simple">
+<li><p>models, especially domain models</p></li>
+<li><p>architecture or design patterns</p></li>
+<li><p>rules for using specific technology</p></li>
+<li><p>principal, often technical decisions of an overarching (= cross-cutting) nature</p></li>
+<li><p>implementation rules</p></li>
+</ul>
+<p>.Motivation
+Concepts form the basis for _conceptual <a href="#id3"><span class="problematic" id="id4">integrity_</span></a> (consistency, homogeneity) of the architecture.
+Thus, they are an important contribution to achieve inner qualities of your system.</p>
+<p>Some of these concepts cannot be assigned to individual building blocks, e.g. security or safety.</p>
+<p>.Form
+The form can be varied:</p>
+<ul class="simple">
+<li><p>concept papers with any kind of structure</p></li>
+<li><p>cross-cutting model excerpts or scenarios using notations of the architecture views</p></li>
+<li><p>sample implementations, especially for technical concepts</p></li>
+<li><p>reference to typical usage of standard frameworks (e.g. using Hibernate for object/relational mapping)</p></li>
+</ul>
+<p>.Structure
+A potential (but not mandatory) structure for this section could be:</p>
+<ul class="simple">
+<li><p>Domain concepts</p></li>
+<li><p>User Experience concepts (UX)</p></li>
+<li><p>Safety and security concepts</p></li>
+<li><p>Architecture and design patterns</p></li>
+<li><p>“Under-the-hood”</p></li>
+<li><p>development concepts</p></li>
+<li><p>operational concepts</p></li>
+</ul>
+<p>Note: it might be difficult to assign individual concepts to one specific topic
+on this list.</p>
+<p>image::08-Crosscutting-Concepts-Structure-EN.png[“Possible topics for crosscutting concepts”]</p>
+<p>.Further Information</p>
+<section id="see-https-docs-arc42-org-section-8-concepts-in-the-arc42-documentation">
+<h1>See <a class="reference external" href="https://docs.arc42.org/section-8/[Concepts">https://docs.arc42.org/section-8/[Concepts</a>] in the arc42 documentation.<a class="headerlink" href="#see-https-docs-arc42-org-section-8-concepts-in-the-arc42-documentation" title="Permalink to this heading">¶</a></h1>
+<p>endif::arc42help[]</p>
+<p>=== _&lt;Concept 1&gt;_</p>
+<p>_&lt;explanation&gt;_</p>
+<p>=== _&lt;Concept 2&gt;_</p>
+<p>_&lt;explanation&gt;_</p>
+<p>…</p>
+<p>=== _&lt;Concept n&gt;_</p>
+<p>_&lt;explanation&gt;_</p>
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../../../../index.html">Django Shop</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../../api.html">API Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="07_deployment_view.html">For multiple environments or alternative deployments please copy and adapt this section of arc42 for all relevant environments.</a></li>
+<li class="toctree-l1"><a class="reference internal" href="07_deployment_view.html#please-copy-the-structure-from-level-1-for-each-selected-element">Please copy the structure from level 1 for each selected element.</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">See https://docs.arc42.org/section-8/[Concepts] in the arc42 documentation.</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../../../index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="07_deployment_view.html" title="previous chapter">For multiple environments or alternative deployments please copy and adapt this section of arc42 for all relevant environments.</a></li>
+      <li>Next: <a href="09_architecture_decisions.html" title="next chapter">&lt;no title&gt;</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 7.1.2</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.13</a>
+      
+      |
+      <a href="../../../../_sources/arch42/EN/asciidoc/src/08_concepts.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

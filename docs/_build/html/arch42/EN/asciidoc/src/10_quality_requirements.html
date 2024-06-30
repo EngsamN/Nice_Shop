@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>&lt;no title&gt; &#8212; Django Shop 0.1 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=b3523f8e" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/alabaster.css?v=039e1c02" />
+    <script data-url_root="../../../../" id="documentation_options" src="../../../../_static/documentation_options.js?v=e031e9a9"></script>
+    <script src="../../../../_static/doctools.js?v=888ff710"></script>
+    <script src="../../../../_static/sphinx_highlight.js?v=4825356b"></script>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" />
+    <link rel="next" title="&lt;no title&gt;" href="11_technical_risks.html" />
+    <link rel="prev" title="&lt;no title&gt;" href="09_architecture_decisions.html" />
+   
+  <link rel="stylesheet" href="../../../../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <p>ifndef::imagesdir[:imagesdir: ../images]</p>
+<p>[[section-quality-scenarios]]
+== Quality Requirements</p>
+<p>ifdef::arc42help[]
+[role=”arc42help”]
+<a href="#id1"><span class="problematic" id="id2">**</span></a><a href="#id3"><span class="problematic" id="id4">**</span></a></p>
+<p>.Content
+This section contains all quality requirements as quality tree with scenarios. The most important ones have already been described in section 1.2. (quality goals)</p>
+<p>Here you can also capture quality requirements with lesser priority,
+which will not create high risks when they are not fully achieved.</p>
+<p>.Motivation
+Since quality requirements will have a lot of influence on architectural
+decisions you should know for every stakeholder what is really important to them,
+concrete and measurable.</p>
+<p>.Further Information</p>
+<p>See <a class="reference external" href="https://docs.arc42.org/section-10/[Quality">https://docs.arc42.org/section-10/[Quality</a> Requirements] in the arc42 documentation.</p>
+<p>=== Quality Tree</p>
+<p>ifdef::arc42help[]
+[role=”arc42help”]
+<a href="#id5"><span class="problematic" id="id6">**</span></a>**
+.Content
+The quality tree (as defined in ATAM – Architecture Tradeoff Analysis Method) with quality/evaluation scenarios as leafs.</p>
+<p>.Motivation
+The tree structure with priorities provides an overview for a sometimes large number of quality requirements.</p>
+<p>.Form
+The quality tree is a high-level overview of the quality goals and requirements:</p>
+<ul class="simple">
+<li><p>tree-like refinement of the term “quality”. Use “quality” or “usefulness” as a root</p></li>
+<li><p>a mind map with quality categories as main branches</p></li>
+</ul>
+<p>In any case the tree should include links to the scenarios of the following section.</p>
+<p>=== Quality Scenarios</p>
+<p>ifdef::arc42help[]
+[role=”arc42help”]
+<a href="#id7"><span class="problematic" id="id8">**</span></a>**
+.Contents
+Concretization of (sometimes vague or implicit) quality requirements using (quality) scenarios.</p>
+<p>These scenarios describe what should happen when a stimulus arrives at the system.</p>
+<p>For architects, two kinds of scenarios are important:</p>
+<ul class="simple">
+<li><p>Usage scenarios (also called application scenarios or use case scenarios) describe the system’s runtime reaction to a certain stimulus. This also includes scenarios that describe the system’s efficiency or performance. Example: The system reacts to a user’s request within one second.</p></li>
+<li><p>Change scenarios describe a modification of the system or of its immediate environment. Example: Additional functionality is implemented or requirements for a quality attribute change.</p></li>
+</ul>
+<p>.Motivation
+Scenarios make quality requirements concrete and allow to
+more easily measure or decide whether they are fulfilled.</p>
+<p>Especially when you want to assess your architecture using methods like
+ATAM you need to describe your quality goals (from section 1.2)
+more precisely down to a level of scenarios that can be discussed and evaluated.</p>
+<p>.Form
+Tabular or free form text.
+<a href="#id9"><span class="problematic" id="id10">**</span></a>**
+endif::arc42help[]</p>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../../../../index.html">Django Shop</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../api.html">API Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="07_deployment_view.html">For multiple environments or alternative deployments please copy and adapt this section of arc42 for all relevant environments.</a></li>
+<li class="toctree-l1"><a class="reference internal" href="07_deployment_view.html#please-copy-the-structure-from-level-1-for-each-selected-element">Please copy the structure from level 1 for each selected element.</a></li>
+<li class="toctree-l1"><a class="reference internal" href="08_concepts.html">See https://docs.arc42.org/section-8/[Concepts] in the arc42 documentation.</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../../../index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="09_architecture_decisions.html" title="previous chapter">&lt;no title&gt;</a></li>
+      <li>Next: <a href="11_technical_risks.html" title="next chapter">&lt;no title&gt;</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 7.1.2</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.13</a>
+      
+      |
+      <a href="../../../../_sources/arch42/EN/asciidoc/src/10_quality_requirements.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

@@ -16,3 +16,10 @@ task generateSite {
         println "Site generation complete."
     }
 }
+// generateOpenApiDocs {
+//     inputFile = '../.github/workflows/openapi.yaml'
+//     outputDir = 'build/api-docs'
+//     config = [
+//         format: 'html'
+//     ]
+// }

@@ -10,7 +10,6 @@ from django.views.generic import  DetailView
 from django.contrib.auth.models import User
 
 from makeup import admin
-from .form  import EditproForm
 from  .models import brand ,product
 # Create your views here.
 def brandsview(request):
@@ -75,16 +74,16 @@ def brandetail(request,id):
     return render(request, template_name, context)
 
 #creat view to edit
-def create_view(request):
-    # dictionary for initial data with
-    # field names as keys
-    context ={}
-    # add the dictionary during initialization
-    form = EditproForm(request.POST or None)
-    if form.is_valid():
-        form.save()     
-    context['form']= form
-    return render(request, "makeup/editpro_form.html", context)
+# def create_view(request):
+#     # dictionary for initial data with
+#     # field names as keys
+#     context ={}
+#     # add the dictionary during initialization
+#     form = EditproForm(request.POST or None)
+#     if form.is_valid():
+#         form.save()     
+#     context['form']= form
+#     return render(request, "makeup/editpro_form.html", context)
 
 
 class EmpImageDisplay(DetailView):

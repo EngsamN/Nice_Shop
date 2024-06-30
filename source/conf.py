@@ -15,5 +15,16 @@ extensions = [
     'sphinx.ext.napoleon',
 ]
 
+
 # The master toctree document.
 master_doc = 'index'
+
+# Add arc42 documentation path
+sys.path.insert(0, os.path.abspath('../source/arc42'))
+
+# General configuration
+project = 'Django Shop'
+author = 'Your Name'
+release = '0.1'
+html_theme = 'alabaster'
+html_static_path = ['_static']
